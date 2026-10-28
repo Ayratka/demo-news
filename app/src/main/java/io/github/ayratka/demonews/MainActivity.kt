@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.ayratka.demonews.ui.theme.DemoNewsTheme
+import io.github.ayratka.demonews.presentation.common.theme.DemoNewsTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

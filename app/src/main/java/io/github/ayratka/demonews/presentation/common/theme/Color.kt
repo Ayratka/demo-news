@@ -1,4 +1,4 @@
-package io.github.ayratka.demonews.ui.theme
+package io.github.ayratka.demonews.presentation.common.theme
 
 import androidx.compose.ui.graphics.Color
 
