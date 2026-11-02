@@ -1,4 +1,4 @@
-package io.github.ayratka.demonews.data.remote.repository
+package io.github.ayratka.demonews.data.repository
 
 import io.github.ayratka.demonews.data.remote.api.NewsApi
 import io.github.ayratka.demonews.data.remote.mappers.NewsMapper

@@ -1,11 +1,11 @@
-package io.github.ayratka.demonews.di
+package io.github.ayratka.demonews.data.di
 
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.github.ayratka.demonews.data.remote.repository.CategoryRepositoryImpl
-import io.github.ayratka.demonews.data.remote.repository.NewsRepositoryImpl
+import io.github.ayratka.demonews.data.repository.CategoryRepositoryImpl
+import io.github.ayratka.demonews.data.repository.NewsRepositoryImpl
 import io.github.ayratka.demonews.domain.repository.CategoryRepository
 import io.github.ayratka.demonews.domain.repository.NewsRepository
 

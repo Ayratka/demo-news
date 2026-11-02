@@ -1,4 +1,4 @@
-package io.github.ayratka.demonews.di
+package io.github.ayratka.demonews.data.di
 
 import dagger.Module
 import dagger.Provides
