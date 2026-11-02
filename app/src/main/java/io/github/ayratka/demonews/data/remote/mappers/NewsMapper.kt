@@ -1,7 +1,9 @@
 package io.github.ayratka.demonews.data.remote.mappers
 
+import io.github.ayratka.demonews.data.remote.dto.CategoryDto
 import io.github.ayratka.demonews.data.remote.dto.NewsDetailsDto
 import io.github.ayratka.demonews.data.remote.dto.NewsDto
+import io.github.ayratka.demonews.domain.model.Category
 import io.github.ayratka.demonews.domain.model.News
 import io.github.ayratka.demonews.domain.model.NewsDetails
 import java.text.SimpleDateFormat
@@ -12,6 +14,14 @@ import java.util.TimeZone
 import javax.inject.Inject
 
 class NewsMapper @Inject constructor() {
+
+
+    fun mapToCategory(dto: CategoryDto): Category {
+        return Category(
+            id = dto.id,
+            name = dto.name,
+        )
+    }
 
     fun mapToDomain(dto: NewsDto): News {
         return News(
