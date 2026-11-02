@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -5,11 +7,50 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+val localProps = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        file.inputStream().use { load(it) }
+    }
+}
+
+fun envOrFail(key: String): String {
+    localProps.getProperty(key)?.let { return it }
+    error(
+        "Configuration '$key' is missing. " +
+                "Add it to local.properties (root project) or set the '$key' env variable. " +
+                "Checked file: ${rootProject.file("local.properties").absolutePath}"
+    )
+}
+
 android {
     namespace = "io.github.ayratka.demonews"
     compileSdk {
         version = release(37)
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    flavorDimensions += "env"
+    productFlavors {
+        create("dev") {
+            dimension = "env"
+            buildConfigField(
+                "String", "BASE_URL",
+                "\"${envOrFail("DEMO_NEWS_DEV_BASE_URL")}\""
+            )
+        }
+        create("prod") {
+            dimension = "env"
+            buildConfigField(
+                "String", "BASE_URL",
+                "\"${envOrFail("DEMO_NEWS_PROD_BASE_URL")}\""
+            )
+        }
+    }
+
 
     defaultConfig {
         applicationId = "io.github.ayratka.demonews"
