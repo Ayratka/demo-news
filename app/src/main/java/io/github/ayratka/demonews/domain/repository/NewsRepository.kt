@@ -6,10 +6,10 @@ import io.github.ayratka.demonews.domain.model.NewsDetails
 interface NewsRepository {
 
     suspend fun getNewsByCategory(
-        categoryId: Int,
+        categoryId: Long,
         page: Int,
     ): List<News>
 
-    suspend fun getNewsDetails(newsId: Int): NewsDetails
+    suspend fun getNewsDetails(newsId: Long): NewsDetails
 
 }

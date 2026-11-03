@@ -13,14 +13,14 @@ class NewsRepositoryImpl @Inject constructor(
 ) : NewsRepository {
 
     override suspend fun getNewsByCategory(
-        categoryId: Int,
+        categoryId: Long,
         page: Int,
     ): List<News> {
         val dtos = api.getNewsByCategory(categoryId, page)
         return dtos.map { mapper.mapToDomain(it) }
     }
 
-    override suspend fun getNewsDetails(newsId: Int): NewsDetails {
+    override suspend fun getNewsDetails(newsId: Long): NewsDetails {
         val dto = api.getNewsDetails(newsId)
         return mapper.mapDetailsToDomain(dto)
     }
