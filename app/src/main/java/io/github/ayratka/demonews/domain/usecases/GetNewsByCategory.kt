@@ -8,7 +8,7 @@ class GetNewsByCategory @Inject constructor(
     private val repository: NewsRepository
 ) {
     suspend operator fun invoke(
-        categoryId: Int,
+        categoryId: Long,
         page: Int,
     ): List<News> = repository.getNewsByCategory(categoryId, page)
 }

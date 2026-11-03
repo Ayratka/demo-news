@@ -8,6 +8,6 @@ class GetNewsDetails @Inject constructor(
     private val repository: NewsRepository
 ) {
 
-    suspend operator fun invoke(newsId: Int): NewsDetails =
+    suspend operator fun invoke(newsId: Long): NewsDetails =
         repository.getNewsDetails(newsId)
 }
