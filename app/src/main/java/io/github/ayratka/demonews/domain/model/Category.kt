@@ -1,6 +1,6 @@
 package io.github.ayratka.demonews.domain.model
 
 data class Category(
-    val id: Int,
+    val id: Long,
     val name: String,
 )
