@@ -1,5 +1,6 @@
 package io.github.ayratka.demonews.presentation.categories
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,7 +8,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -103,9 +106,10 @@ private fun CategoriesList(
     categories: List<Category>,
     onCategoryClick: (Long) -> Unit,
 ) {
-    LazyRow(
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().padding(top = 20.dp),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
 
         items(categories, key = { it.id }) { category ->
@@ -118,6 +122,8 @@ private fun CategoriesList(
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier
+                    .fillMaxWidth()
+                    .height(42.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .clickable(onClick = onClick)
                     .padding(horizontal = 8.dp, vertical = 6.dp),
