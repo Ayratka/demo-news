@@ -11,6 +11,7 @@ ksp = "2.3.12"
 composeBom = "2026.09.00"
 mockk = "1.13.8"
 coroutinesTest = "1.7.3"
+moshiVersion = "1.15.2"
 turbine = "1.0.0"
 hilt = "2.60.1"
 hiltNavigationCompose = "1.4.0"
@@ -42,6 +43,7 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 # Testing - Unit tests
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshiVersion" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 # Hilt

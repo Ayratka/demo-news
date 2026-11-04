@@ -111,6 +111,9 @@ dependencies {
     // Networking
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi)
+    ksp(libs.moshi.kotlin.codegen)
+
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.moshi.kotlin)
 

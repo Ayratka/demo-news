@@ -1,5 +1,6 @@
 package io.github.ayratka.demonews.data.remote.api
 
+import io.github.ayratka.demonews.data.remote.dto.ApiResponse
 import io.github.ayratka.demonews.data.remote.dto.CategoryDto
 import io.github.ayratka.demonews.data.remote.dto.NewsDetailsDto
 import io.github.ayratka.demonews.data.remote.dto.NewsDto
@@ -9,8 +10,8 @@ import retrofit2.http.Query
 
 interface NewsApi {
 
-    @GET("categories")
-    suspend fun getCategories(): List<CategoryDto>
+    @GET("news/categories")
+    suspend fun getCategories(): ApiResponse<CategoryDto>
 
     @GET("news")
     suspend fun getNewsByCategory(
