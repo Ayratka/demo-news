@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import io.github.ayratka.demonews.domain.model.Category
+import io.github.ayratka.demonews.presentation.common.components.ErrorBlock
 
 @Composable
 fun CategoriesScreen(
@@ -76,30 +77,7 @@ private fun CategoriesContent(
     }
 }
 
-@Composable
-fun ErrorBlock(
-    message: String,
-    onRetry: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier.padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-        Text(
-            text = message,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
-        )
 
-        Button(onClick = onRetry) {
-            Text("Retry")
-        }
-    }
-}
 
 @Composable
 private fun CategoriesList(
