@@ -1,5 +1,6 @@
 package io.github.ayratka.demonews.domain.usecases
 import io.github.ayratka.demonews.domain.model.News
+import io.github.ayratka.demonews.domain.model.Outcome
 import io.github.ayratka.demonews.domain.repository.CategoryRepository
 import io.github.ayratka.demonews.domain.repository.NewsRepository
 import javax.inject.Inject
@@ -10,5 +11,5 @@ class GetNewsByCategory @Inject constructor(
     suspend operator fun invoke(
         categoryId: Long,
         page: Int,
-    ): List<News> = repository.getNewsByCategory(categoryId, page)
+    ): Outcome<List<News>> = repository.getNewsByCategory(categoryId, page)
 }

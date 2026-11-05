@@ -3,6 +3,7 @@ package io.github.ayratka.demonews.presentation.categories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.ayratka.demonews.domain.model.Outcome
 import io.github.ayratka.demonews.domain.usecases.GetCategories
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
@@ -42,18 +43,20 @@ class CategoriesViewModel @Inject constructor(
         retryTrigger.tryEmit(Unit)
     }
 
-    private fun loadCategories(): Flow<CategoriesUiState> {
-        val source = flow {
-            val categories = getCategories()
-            emit(
-                if (categories.isEmpty()) CategoriesUiState.Empty
-                else CategoriesUiState.Success(categories)
-            )
+    private fun loadCategories(): Flow<CategoriesUiState> = flow {
+        when (val result = getCategories()) {
+            is Outcome.Success -> {
+                emit(
+                    if (result.value.isEmpty()) CategoriesUiState.Empty
+                    else CategoriesUiState.Success(result.value)
+                )
+            }
+            is Outcome.Failure -> {
+                emit(CategoriesUiState.Error(result.error.message))
+            }
         }
-        return source
-            .onStart { emit(CategoriesUiState.Loading) }
-            .catch { emit(CategoriesUiState.Error(it.message ?: "Failed to load categories")) }
     }
+        .onStart { emit(CategoriesUiState.Loading) }
 
     fun retry(){
         retryTrigger.tryEmit(Unit)
