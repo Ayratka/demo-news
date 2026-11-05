@@ -28,7 +28,7 @@ class NewsMapper @Inject constructor() {
             id = dto.id,
             title = dto.title,
             shortDescription = dto.shortDescription,
-            date = parseDate(dto.date),
+            date = dto.date,
         )
     }
 
