@@ -6,4 +6,8 @@ import com.squareup.moshi.JsonClass
 data class ApiResponse<T>(
     val code: Int,
     val list: List<T>? = null,
-)
+    val news: T? = null,
+){
+    fun items(): List<T> = list.orEmpty()
+    fun single(): T? = news
+}
