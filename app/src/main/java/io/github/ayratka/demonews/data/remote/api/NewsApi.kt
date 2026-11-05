@@ -13,11 +13,11 @@ interface NewsApi {
     @GET("news/categories")
     suspend fun getCategories(): ApiResponse<CategoryDto>
 
-    @GET("news")
+    @GET("news/categories/{id}/news")
     suspend fun getNewsByCategory(
-        @Query("category_id") categoryId: Long,
+        @Path("id") categoryId: Long,
         @Query("page") page: Int,
-    ): List<NewsDto>
+    ): ApiResponse<NewsDto>
 
     @GET("news/{id}")
     suspend fun getNewsDetails(@Path("id") newsId: Long): NewsDetailsDto
