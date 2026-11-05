@@ -35,7 +35,7 @@ class NewsMapper @Inject constructor() {
     fun mapDetailsToDomain(newsDetailsDto: NewsDetailsDto): NewsDetails = NewsDetails(
         id = newsDetailsDto.id,
         title = newsDetailsDto.title,
-        date = parseDate(newsDetailsDto.date),
+        date = newsDetailsDto.date,
         shortDescription = newsDetailsDto.shortDescription,
         fullDescription = newsDetailsDto.fullDescription,
     )

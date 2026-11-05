@@ -2,6 +2,7 @@ package io.github.ayratka.demonews.data.repository
 
 import io.github.ayratka.demonews.data.remote.api.NewsApi
 import io.github.ayratka.demonews.data.remote.dto.requireSuccessList
+import io.github.ayratka.demonews.data.remote.dto.requireSuccessSingle
 import io.github.ayratka.demonews.data.remote.mappers.NewsMapper
 import io.github.ayratka.demonews.domain.model.AppError
 import io.github.ayratka.demonews.domain.model.News
@@ -40,7 +41,8 @@ class NewsRepositoryImpl @Inject constructor(
     override suspend fun getNewsDetails(newsId: Long): Outcome<NewsDetails> {
         return try {
             val response = api.getNewsDetails(newsId)
-            Outcome.Success(mapper.mapDetailsToDomain(response))
+            requireSuccessSingle(response.code, response.news)
+                .map { mapper.mapDetailsToDomain(it) }
         } catch (e: CancellationException) {
             throw e
         } catch (e: HttpException) {

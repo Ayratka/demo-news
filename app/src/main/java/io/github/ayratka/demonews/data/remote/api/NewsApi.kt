@@ -19,6 +19,6 @@ interface NewsApi {
         @Query("page") page: Int,
     ): ApiResponse<NewsDto>
 
-    @GET("news/{id}")
-    suspend fun getNewsDetails(@Path("id") newsId: Long): NewsDetailsDto
+    @GET("news/details")
+    suspend fun getNewsDetails(@Query("id") newsId: Long): ApiResponse<NewsDetailsDto>
 }

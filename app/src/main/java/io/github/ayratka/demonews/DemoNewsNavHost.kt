@@ -8,15 +8,15 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import io.github.ayratka.demonews.presentation.categories.CategoriesScreen
 import io.github.ayratka.demonews.presentation.navigation.Destinations
+import io.github.ayratka.demonews.presentation.newsdetails.NewsDetailsScreen
 import io.github.ayratka.demonews.presentation.newslist.NewsListScreen
 
 @Composable
 fun DemoNewsNavHost() {
     val navController = rememberNavController()
-
     NavHost(
         navController = navController,
-        startDestination = Destinations.CATEGORIES,   // <- первый экран
+        startDestination = Destinations.CATEGORIES,
     ) {
         composable(Destinations.CATEGORIES) {
             CategoriesScreen(
@@ -31,9 +31,15 @@ fun DemoNewsNavHost() {
         ) {
             NewsListScreen(
                 onNewsClick = { newsId ->
-                        // news details
+                    navController.navigate(Destinations.newsDetails(newsId))
                 },
             )
+        }
+        composable(
+            route = Destinations.NEWS_DETAILS,
+            arguments = listOf(navArgument("newsId") { type = NavType.LongType }),
+        ) {
+            NewsDetailsScreen()
         }
     }
 }
