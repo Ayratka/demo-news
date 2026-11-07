@@ -33,7 +33,7 @@ class NewsMapperTest {
         assertEquals(1, result.id)
         assertEquals("Title", result.title)
         assertEquals("Short", result.shortDescription)
-        assertEquals(2016, result.date.year)
+        assertEquals("2016-08-03T11:15:21.104Z", result.date)
     }
 
     @Test

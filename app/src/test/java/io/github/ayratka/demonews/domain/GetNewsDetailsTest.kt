@@ -1,16 +1,19 @@
 package io.github.ayratka.demonews.domain
-
+import dev.mokkery.answering.returns
+import dev.mokkery.everySuspend
+import dev.mokkery.matcher.any
+import dev.mokkery.mock
+import dev.mokkery.verifySuspend
+import dev.mokkery.verify.VerifyMode.Companion.exactly
+import io.github.ayratka.demonews.domain.model.AppError
 import io.github.ayratka.demonews.domain.model.NewsDetails
+import io.github.ayratka.demonews.domain.model.Outcome
 import io.github.ayratka.demonews.domain.repository.NewsRepository
 import io.github.ayratka.demonews.domain.usecases.GetNewsDetails
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.mockk
-import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import java.time.LocalDateTime
 
 class GetNewsDetailsTest {
 
@@ -19,42 +22,39 @@ class GetNewsDetailsTest {
 
     @Before
     fun setup() {
-        repository = mockk()
+        repository = mock()
         useCase = GetNewsDetails(repository)
     }
 
     @Test
-    fun `invoke should return news details for given id`() = runTest {
-        // Given
-        val newsId = 42
-        val expectedDetails = NewsDetails(
-            id = newsId,
-            title = "Важная новость",
-            shortDescription = "Краткое описание",
-            fullDescription = "<p>Полный HTML контент</p>",
-            date = LocalDateTime.now(),
-        )
-        coEvery { repository.getNewsDetails(newsId) } returns expectedDetails
+    fun `invoke returns details from repository`() = runTest {
+        val details = NewsDetails(42L, "Title", "2024-01-01T00:00:00Z", "Short", "Full")
+        everySuspend { repository.getNewsDetails(42L) } returns Outcome.Success(details)
 
-        // When
-        val result = useCase(newsId)
+        val result = useCase(42L)
 
-        // Then
-        assertEquals(expectedDetails, result)
-        coVerify(exactly = 1) { repository.getNewsDetails(newsId) }
+        assertEquals(Outcome.Success(details), result)
+        verifySuspend(exactly(1)) { repository.getNewsDetails(42L) }
     }
 
     @Test
-    fun `invoke should pass correct newsId to repository`() = runTest {
-        // Given
-        val newsId = 99
-        coEvery { repository.getNewsDetails(any()) } returns mockk()
+    fun `invoke passes newsId to repository`() = runTest {
+        everySuspend { repository.getNewsDetails(any()) } returns
+                Outcome.Success(NewsDetails(1L, "T", "2024-01-01T00:00:00Z", "S", "F"))
 
-        // When
-        useCase(newsId)
+        useCase(99L)
 
-        // Then
-        coVerify { repository.getNewsDetails(newsId) }
+        verifySuspend { repository.getNewsDetails(99L) }
     }
 
+    @Test
+    fun `invoke passes through failure outcome`() = runTest {
+        everySuspend { repository.getNewsDetails(any()) } returns
+                Outcome.Failure(AppError.Api(404, "Not found"))
+
+        assertEquals(
+            Outcome.Failure(AppError.Api(404, "Not found")),
+            useCase(42L),
+        )
+    }
 }
