@@ -44,6 +44,6 @@ Key decisions:
 
 ## Screenshots
 
-| Categories | News list | Details |
-|---|---|---|
-| ![categories](docs/screenshots/categories.png) | ![list](docs/screenshots/newslist.png) | ![details](docs/screenshots/details.png) |
+| Categories | News list | Details                                      |
+|---|---|----------------------------------------------|
+| ![categories](docs/screenshots/categories.png) | ![list](docs/screenshots/newslist.png) | ![details](docs/screenshots/newsdetails.png) |
