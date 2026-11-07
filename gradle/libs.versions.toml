@@ -9,6 +9,8 @@ activityCompose = "1.13.0"
 kotlin = "2.4.21"
 ksp = "2.3.12"
 composeBom = "2026.09.00"
+mockative = "3.3.2"
+mockativeProcessor = "3.3.2"
 mockk = "1.13.8"
 coroutinesTest = "1.7.3"
 moshiVersion = "1.15.2"
@@ -41,6 +43,8 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 # Testing - Unit tests
+mockative-processor = { module = "io.mockative:mockative-processor", version.ref = "mockativeProcessor" }
+mockative = { module = "io.mockative:mockative", version.ref = "mockative" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshiVersion" }

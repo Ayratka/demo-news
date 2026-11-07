@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
+    id("dev.mokkery")
 }
 
 val localProps = Properties().apply {
@@ -62,6 +63,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -122,7 +126,6 @@ dependencies {
     implementation(libs.androidx.paging.compose)
 
     // Testing
-    // Testing - Unit tests
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
